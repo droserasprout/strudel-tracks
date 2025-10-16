@@ -31,8 +31,8 @@ const bd_s = "bd:2 bd:1 bd:3 bd:4"
 const hh_s = "~ hh:0 ~ hh:1 ~ hh:2 ~ hh:1"
 const fl_n = "[eb,g,bb,d],[~ ~ ~ <d4 g4>/3]/4"
 
-const sl0 = slider(1, 0, 1, 0.1)
-const sl1 = slider(0.8, 0, 1, 0.1)
+const sl0 = slider(0.3, 0, 1, 0.1)
+const sl1 = slider(0.7, 0, 1, 0.1)
 const sl2 = slider(1, 0, 2, 1)
 
 bd: s(bd_s).bank("ry30")
@@ -64,6 +64,6 @@ fl: note(fl_n).s("gm_flute")
 sh: n(sh_n).scale("C3:minor").s("gm_shamisen")
   .ph(4).phc(2500).room(.5).lpf(8500).att(.007)
   .gain(sh_gain.mul(sl1)).orbit(1)
-  .someCyclesBy(.2, ply("1.25"))
-  .someCyclesBy(.2, add("[a2]/4"))
+  .someCyclesBy(.2, ply("1.1"))
+  .sometimesBy(.2, late(".1"))
   .sometimesBy(.3, x=> x.slow(2).clip(".6"))
