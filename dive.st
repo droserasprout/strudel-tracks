@@ -1,4 +1,6 @@
-// "dive" @by terry fail 
+// @title dive
+// @by terry fail
+//
 setcpm(125/4)
 
 $: s("bd bd bd bd").bank("tr505")
@@ -49,6 +51,3 @@ $xylo: note("~|~|~|~|~|~| a*3 ~ ~ a*3 a | d/2 a*2 ~ ~ a*2")
   .distort(".5 | .3")
   .orbit(2)
   .gain("[.3 | .4]/16")
-
-// when i grow up i want to be like Switch Angel 🥰
-// had no idea algorave exists before discovering her insta

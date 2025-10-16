@@ -1,7 +1,8 @@
-// "autumn" @by terry fail
-
+// @title autumn
+// @by terry fail
+//
 setcpm(125/4)
-
+  
 const _rng = (c, a, b, s, seg=8) => (
   r => s > 0 ? r.fast(s) : r.slow(-s)
 )(c.segment(seg).range(a, b))
