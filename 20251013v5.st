@@ -31,7 +31,7 @@ const bd_s = "bd:2 bd:1 bd:3 bd:4"
 const hh_s = "~ hh:0 ~ hh:1 ~ hh:2 ~ hh:1"
 const fl_n = "[eb,g,bb,d],[~ ~ ~ <d4 g4>/3]/4"
 
-const sl0 = slider(0.5, 0, 1, 0.1)
+const sl0 = slider(0.8, 0, 1, 0.1)
 const sl1 = slider(0.7, 0, 1, 0.1)
 const sl2 = slider(1, 0, 2, 1)
 
@@ -42,7 +42,7 @@ bd: s(bd_s).bank("ry30")
   .delay("<.4 .5>/2").dfb(.6)
   .att(0.01).dec(bd_dec).lpf(bd_lpf)
   .gain(bd_gain.mul(sl0)).pan(bd_pan)
-  
+  .someCyclesBy(0.1, x => x.hush("bd"))
 
 hh: s(hh_s).bank("tr808")
   .att(0.01).dec(.5).distort(.2)
@@ -66,4 +66,4 @@ sh: n(sh_n).scale("C3:minor").s("gm_shamisen")
   .gain(sh_gain.mul(sl1)).orbit(1)
   .sometimesBy(.2, late(".25"))
   .someCyclesBy(.2, ply("1.5"))
-  .sometimesBy(.3, x=> x.slow(2).clip(".7"))
+  .sometimesBy(.3, x=> x.slow(2).clip("<.5 .8>"))
