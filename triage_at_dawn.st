@@ -10,18 +10,17 @@ let pd_n = "[[e4,a4,e5] [d5,d4,g4] [a4,d4,a3] [a4,d4,a3]]/4"
 let bs_n = "[a2 a3]/4"
 let fm_n = "[10*2 10, 8 9, 12]*2 10/2"
 let bd_s = "[bd]*16"
-let hh_s = "hh:2 hh:3 hh:4 hh:2"
+let hh_s = "hh:2 hh:3 hh:4 [hh:2]*2"
 let hh_slice = "[[0,2] [0,1] <0 3*2> [0,2] [3,4*2] [1~1] 0 1]*2"
 
 bd: s(bd_s).bank("ry30")
-  .distort(.7).delay(.25).lpf("<6200 6500 6800>/2").room(.1).rsize(1)
-  .duckorbit(1).duckdepth(.1).duckatt(.2).gain("<.5 .52 .54 .52>")
-  .sometimesBy(.2, x => x.late(.25)).att(.001)
+  .distort(.6).delay(.25).lpf("<6200 6500 6800>/2").room(.1).rsize(2)
+  .duckorbit(1).duckdepth(.1).duckatt(.2).gain(.6)
+  .sometimesBy(.3, x => x.late(.25)).att(.001)
 hh: s(hh_s).bank("ry30")
   .duckorbit(2).duckdepth(.25).duckatt(.5)
   .distort(.6).delay(.5).lpf("<3500 3750 4000>").room(.3).rsize(5).gain(.9)
   .slice(4, hh_slice.every(4, rev))
-  .every(3, ply(2))
 ld1: note(ld_n).s("piano")
   .distort(1).delay(.5).dt(.1).juxby(0.3, rev)
   .pan(.55).room(.6).rsize(5).att(.08).ph(4).crush(16)
