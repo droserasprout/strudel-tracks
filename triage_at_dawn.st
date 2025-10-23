@@ -10,7 +10,6 @@ let pd_n = "[[e4,a4,e5] [d5,d4,g4] [a4,d4,a3] [a4,d4,a3]]/4"
 let bs_n = "[a2 a3]/4"
 let fm1_n = "[10*2 10, 8, 12]*2 10/2"
 let fm2_n = "[10*2 10, 9, 12]*2 10/2"
-let fm_fb = "[.1 .1 .1 0]/16"
 let bd_s = "[bd]*16"
 let hh_s = "hh:2 hh:3 hh:4 [hh:2]*2"
 let hh_lpf = "<3500 3750 4000>"
@@ -36,10 +35,10 @@ ld2: note(ld_n).s("piano1")
   .pan(.45)
   .room(.8).rsize(8)
   .late(.25).lpf(3300).lpe(.5).ph(4)
-pd: note(pd_n).s("sine").room(.8).vib(.02).orbit(1).att(.1).rel(.2)
-bs: note(bs_n).s("sine").room(.5).vib(.01).orbit(2).att(.2).rel(.1)
+pd: note(pd_n).s("sine").room(".6:6").vib(.02).orbit(1).att(.1).rel(.2)
+bs: note(bs_n).s("sine").room(".5:5").vib(.01).orbit(2).att(.2).rel(.1)
 fm1: n(fm1_n).s("fm/2").slow(4)
-  .speed(.5).irspeed(.25)
+  .speed(.5).irspeed(.25).rel(.25)
   .crush(8).att(.1)
   .gain(.5).orbit(1).pan(.45)
   .room(".6:3")
