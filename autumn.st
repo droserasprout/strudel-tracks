@@ -1,5 +1,6 @@
 // @title autumn
 // @by terry fail
+// @details v1.0
 //
 setcpm(125/4)
   

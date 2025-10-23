@@ -1,5 +1,6 @@
 // @title kelly bailey - triage at dawn (terry fail rework)
 // @by terry fail
+// @details v0.1.0
 //
 samples('github:tidalcycles/dirt-samples')
 setcpm(80/4)
@@ -13,21 +14,29 @@ let fm_fb = "[.1 .1 .1 0]/8"
 let bd_s = "[bd]*16"
 let hh_s = "hh:2 hh:3 hh:4 [hh:2]*2"
 let hh_lpf = "<3500 3750 4000>"
-let hh_slice = "[[0,2] [0,1] <0 3*2> [0,2] [3,4*2] [1~1] 0 1]*2"
+let hh_slice = "[<0 2> <0 1> <0 3*2> 0 [4*2] [1~1] 0 1]*2"
 
 bd: s(bd_s).bank("ry30")
-  .distort(.5).delay(.25).lpf(6200).room(.1).rsize(2)
-  .duckorbit(1).duckdepth(.1).duckatt(.2).gain(.7).att(.001)
+  .distort(.5).delay(.25).lpf(6200).att(.005).rel(.9)
+  // .room(.1).rsize(2)
+  .duckorbit(1).duckdepth(.1).duckatt(.2)
+  .gain(.7)
 hh: s(hh_s).bank("ry30")
-  .duckorbit(2).duckdepth(.25).duckatt(.5)
-  .distort(.6).delay(.5).lpf(hh_lpf).room(.3).rsize(5).gain(.9)
   .slice(4, hh_slice.every(4, rev))
+  .duckorbit(2).duckdepth(.25).duckatt(.5)
+  .distort(.6).delay(.5).lpf(hh_lpf)
+  // .room(.2).rsize(5)
+  .gain(.9)
 ld1: note(ld_n).s("piano")
   .distort(1).delay(.6).dt(.1).juxby(.5, rev)
-  .pan(.55).room(.6).rsize(5).att(.1).ph(8).crush(16)
+  .pan(.55)
+  .room(.6).rsize(5)
+  .att(.1).ph(8).crush(16)
 ld2: note(ld_n).s("piano1")
-  .distort(1).delay(.6).juxBy(.5, rev)
-  .pan(.45).room(.8).rsize(8)
+  .distort(1).delay(.6)
+  .juxBy(.5, rev)
+  .pan(.45)
+  .room(.8).rsize(8)
   .late(.25).lpf(3300).lpe(.5).ph(4)
 pd: note(pd_n).s("sine").room(.8).vib(.02).orbit(1).att(.1).rel(.2)
 bs: note(bs_n).s("sine").room(.5).vib(.01).orbit(2).att(.2).rel(.1)
