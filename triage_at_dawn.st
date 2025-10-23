@@ -2,7 +2,6 @@
 // @by terry fail
 //
 samples('github:tidalcycles/dirt-samples')
-
 setcpm(80/4)
 
 let ld_n = "[c6 ~ ~ a5 ~ ~ c6 ~ b5 ~ ~ g5 ~ ~ a5 ~ e5 ~ ~ d5 ~ ~ c5 ~ e5 ~ ~ d5 ~ ~ e5 ~]/4"
@@ -24,12 +23,12 @@ hh: s(hh_s).bank("ry30")
   .distort(.6).delay(.5).lpf(hh_lpf).room(.3).rsize(5).gain(.9)
   .slice(4, hh_slice.every(4, rev))
 ld1: note(ld_n).s("piano")
-  .distort(1).delay(.6).dt(.1).juxby(.4, rev)
-  .pan(.55).room(.6).rsize(5).att(.08).ph(4).crush(16)
+  .distort(1).delay(.6).dt(.1).juxby(.5, rev)
+  .pan(.55).room(.6).rsize(5).att(.1).ph(8).crush(16)
 ld2: note(ld_n).s("piano1")
-  .distort(1).delay(.6).juxBy(.7, rev)
+  .distort(1).delay(.6).juxBy(.5, rev)
   .pan(.45).room(.8).rsize(8)
-  .late(.25).lpf(2300).ph(4)
+  .late(.25).lpf(3300).lpe(.5).ph(4)
 pd: note(pd_n).s("sine").room(.8).vib(.02).orbit(1).att(.1).rel(.2)
 bs: note(bs_n).s("sine").room(.5).vib(.01).orbit(2).att(.2).rel(.1)
 fm1: n(fm1_n).s("fm/2").slow(4)
