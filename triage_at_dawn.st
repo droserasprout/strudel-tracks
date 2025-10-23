@@ -1,6 +1,6 @@
 // @title kelly bailey - triage at dawn (terry fail rework)
 // @by terry fail
-// @details v0.1.0
+// @details v0.1.1
 //
 samples('github:tidalcycles/dirt-samples')
 setcpm(80/4)
