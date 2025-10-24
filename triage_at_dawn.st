@@ -1,6 +1,6 @@
 // @title kelly bailey - triage at dawn (terry fail rework)
 // @by terry fail
-// @details v0.1.7
+// @details v0.1.8
 //
 samples('github:tidalcycles/dirt-samples')
 setcpm(80/4)
@@ -9,15 +9,16 @@ let ld_n = "[c6 ~ ~ a5 ~ ~ c6 ~ b5 ~ ~ g5 ~ ~ a5 ~ e5 ~ ~ d5 ~ ~ c5 ~ e5 ~ ~ d5 
 let pd_n = "[[e4,a4,e5] [d5,d4,g4] [a4,d4,a3] [a4,d4,a3]]/4"
 let bs_n = "[a2 a3]/4"
 let fm_n = "[10*2 10, 8, 12/2]*2 10/2"
-let bd_s = "[bd]*16"
+// let bd_s = "bd bd bd:1 [bd ~ bd:1 ~ bd*3]"
+let bd_s = "[bd]*<16 16 8 16 8 8 [16 32] 8 8>"
 let hh_s = "hh:2 hh:3 hh:4 [hh:2]*2"
 let hh_lpf = "<3500 3750 4000>"
-let hh_slice = "[<0 2> <0 1> <0 3*2> 0 [4*2] [1~1] 0 1]*2"
+let hh_slice = "[<0 2> <0 1> <0 3*2> 0 [3*2] [1~1] 0 1]*2"
 
-let bd_gain = slider(1, 0, 1, .05)
-let ld_gain = slider(0.85, 0, 1, .05)
+let bd_gain = slider(0.85, 0, 1, .05)
+let ld_gain = slider(0.35, 0, 1, .05)
 let fm_gain = slider(0.8, 0, 1, .05)
-let fm_delay = slider(1, 0, 1, .05)
+let fm_delay = slider(0.8, 0, 1, .05)
 // let fm_speed = slider(1, 0, 1, .05)
 let fm_speed = "<.25 .25 .5 .5 .25 .25 .5 .5 .25 .25 .5 .5 .64 .58 .50 .55>"
 
@@ -60,7 +61,7 @@ fm1: n(fm_n).s("fm/2").slow(4)
   .adsr(".05:1:1:1")
   .delay(fm_delay)
   .speed(fm_speed).irspeed(.25)
-  .crush(8)
+  .crush(5)
   .gain(mul(fm_gain, 1))
   .orbit(1).pan(.45)
   .room(".7:6")
