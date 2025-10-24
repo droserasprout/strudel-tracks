@@ -1,6 +1,6 @@
 // @title kelly bailey - triage at dawn (terry fail rework)
 // @by terry fail
-// @details v0.1.12
+// @details v0.1.13
 //
 samples('github:tidalcycles/dirt-samples')
 setcpm(80/4)
@@ -14,23 +14,25 @@ let pd_n = "[[e4,a4,e5] [d5,d4,g4] [a4,d4,a3] [a4,d4,a3]]/4"
 let bs_n = "[a2 a3]/4"
 let fm_n = "[10*2 10, 8, 12/2]*2, 10/2"
 
-let bd_gain = slider(0.8)
-let hh_gain = slider(0.564)
-let ld_gain = slider(0.748)
-let fm_gain = slider(0.503)
+let bd_gain = slider(0)
+let hh_gain = slider(1)
+let ld_gain = slider(0.5)
+let fm_gain = slider(0.298)
 
-let fm_delay = slider(0.5, 0, 1, .05)
+// let fm_delay = slider(0.5, 0, 1, .05)
+let fm_delay = "<.2 .5 .75 1>/4"
 // let fm_speed = slider(1, 0, 1, .05)
 let fm_speed = "<.25 .25 .5 .5 .25 .25 .5 .55 .25 .25 .5 .5 .64 .58 .50 .55>"
 let fm_lpf = "[20000|15000|8000|3000|1500|1000]/2"
 
 bd: s(bd_s).bank("ry30")
   .adsr(".002:1:1:.9")
-  .distort(.5).delay(.25).lpf("6100:.8")
-  .duckorbit(1).duckdepth(.1).duckatt(.2)
+  .distort(.5).delay(.25).lpf("5500:3")
+  .duckorbit(1).duckdepth(.2).duckatt(.25)
   .sometimesBy(.15, ply(2))
   .gain(bd_gain)
-  .someCyclesBy(.2, x => x.hpf("120"))
+  .someCyclesBy(.2, x => x.hpf("180"))
+  .someCyclesBy(.1, x => x.gain(".3"))
 hh: s(hh_s).bank("ry30")
   .adsr("0:0:.8:0")
   .slice(4, hh_slice.every(4, rev))
@@ -55,7 +57,7 @@ ld_h: note(ld_n).s("piano1")
   .pan(.45).gain(ld_gain)
   .delay(".5:.5")
   .room(".7:5")
-  .late(.25).lpf("2400:.8").ph(4)
+  .late(.25).lpf("2250").ph(8)
   .sometimesBy(.2, ply(3))
 
 pd: note(pd_n).s("sine")
@@ -77,7 +79,7 @@ fm_l: n(fm_n).s("fm/2").slow(4)
   .room(".7:6")
   .lpf(fm_lpf)
 fm_h: n(fm_n).s("fm").late(.5)
-  .adsr(".2:1:1:.5")
+  .adsr(".3:1:1:.5")
   .delay(fm_delay)
   .crush(5)
   .speed(mul(fm_speed, 2))
