@@ -1,11 +1,10 @@
 // @title kelly bailey - triage at dawn (terry fail rework)
 // @by terry fail
-// @details v0.1.11
+// @details v0.1.12
 //
 samples('github:tidalcycles/dirt-samples')
 setcpm(80/4)
 
-// let bd_s = "bd bd bd:1 [bd ~ bd:1 ~ bd*3]"
 let bd_s = "[bd]*<16 16 8 16 16 8 [16 32] 8 8>"
 let hh_s = "hh:2 hh:3 hh:4 [hh:2]*2"
 let hh_lpf = "<3500 3750 4000>"
@@ -15,10 +14,10 @@ let pd_n = "[[e4,a4,e5] [d5,d4,g4] [a4,d4,a3] [a4,d4,a3]]/4"
 let bs_n = "[a2 a3]/4"
 let fm_n = "[10*2 10, 8, 12/2]*2, 10/2"
 
-let bd_gain = slider(0.82)
-let hh_gain = slider(1)
-let ld_gain = slider(0.892)
-let fm_gain = slider(0.8)
+let bd_gain = slider(0.8)
+let hh_gain = slider(0.564)
+let ld_gain = slider(0.748)
+let fm_gain = slider(0.503)
 
 let fm_delay = slider(0.5, 0, 1, .05)
 // let fm_speed = slider(1, 0, 1, .05)
@@ -26,19 +25,20 @@ let fm_speed = "<.25 .25 .5 .5 .25 .25 .5 .55 .25 .25 .5 .5 .64 .58 .50 .55>"
 let fm_lpf = "[20000|15000|8000|3000|1500|1000]/2"
 
 bd: s(bd_s).bank("ry30")
-  .adsr(".001:1:1:.9")
+  .adsr(".002:1:1:.9")
   .distort(.5).delay(.25).lpf("6100:.8")
   .duckorbit(1).duckdepth(.1).duckatt(.2)
   .sometimesBy(.15, ply(2))
   .gain(bd_gain)
+  .someCyclesBy(.2, x => x.hpf("120"))
 hh: s(hh_s).bank("ry30")
   .adsr("0:0:.8:0")
   .slice(4, hh_slice.every(4, rev))
   .duckorbit(2).duckdepth(.2).duckatt(.5)
-  .distort(.6).delay(".48:.48:.1").lpf(hh_lpf)
+  .distort(.6).delay(".5:.5:.04").lpf(hh_lpf)
   .gain(hh_gain)
 
-ld1: note(ld_n).s("piano")
+ld_l: note(ld_n).s("piano")
   .adsr(".1:0:1:.5")
   .distort(1).delay(.8).dt(.1)
   .juxby(.6, rev)
@@ -48,14 +48,14 @@ ld1: note(ld_n).s("piano")
   .sometimesBy(.3, ply(2))
   .delay(".5:.5")
   .someCyclesBy(.2, x => x.slow("2"))
-ld2: note(ld_n).s("piano1")
-  .adsr(".1:0:1:1")
+ld_h: note(ld_n).s("piano1")
+  .adsr(".1:.3:1:1")
   .distort(1).delay(.6)
   .juxBy(.6, rev)
-  .pan(.45).gain(mul(ld_gain, .95))
+  .pan(.45).gain(ld_gain)
   .delay(".5:.5")
-  .room(".8:7")
-  .late(.25).lpf("2500:.9").ph(4)
+  .room(".7:5")
+  .late(.25).lpf("2400:.8").ph(4)
   .sometimesBy(.2, ply(3))
 
 pd: note(pd_n).s("sine")
@@ -67,21 +67,21 @@ bs: note(bs_n).s("sine")
   .room(".5:5").vib(.01).orbit(2)
   .pan(.55)
 
-fm1: n(fm_n).s("fm/2").slow(4)
-  .adsr(".1:1:1:1")
+fm_l: n(fm_n).s("fm/2").slow(4)
+  .adsr(".2:1:1:1")
   .delay(fm_delay)
   .speed(fm_speed).irspeed(.25)
   .crush(5)
-  .gain(mul(fm_gain, 1))
+  .gain(mul(fm_gain, .8))
   .orbit(1).pan(.45)
   .room(".7:6")
   .lpf(fm_lpf)
-fm2: n(fm_n).s("fm").late(.5)
-  .adsr(".1:1:1:.5")
+fm_h: n(fm_n).s("fm").late(.5)
+  .adsr(".2:1:1:.5")
   .delay(fm_delay)
   .crush(5)
   .speed(mul(fm_speed, 2))
-  .gain(mul(fm_gain, .75))
+  .gain(mul(fm_gain, .6))
   .orbit(2).pan(.55)
   .lpf(fm_lpf)
   .room(".7:7")
