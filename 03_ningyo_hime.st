@@ -1,15 +1,15 @@
 // @title rie tanaka - ningyo hime (terry fail rework)
 // @by terry fail
-// @details v0.1.6
+// @details v0.1.7
 //
 samples('github:tidalcycles/dirt-samples')
 setcpm(48/4)
 
 let gt_ch = `[
   [Em C [D C] C C B B]
-  [Em A D [D G] G [C Bm] Bm A]
-  [Em C [D G] G C C B B]
-  [Em A D D G C Bm Bm]
+  [Em A D [D G] G [C Bm] Bm Bm]
+  [Em C [D G] G C [C B] B B]
+  [Em A D [D G] G [C Bm] Bm Bm]
   [C7 G]*4
 ]/16`
 let gt_s = "gm_acoustic_guitar_nylon:[0|0|0|2|5]*8"
