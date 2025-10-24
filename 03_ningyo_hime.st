@@ -1,23 +1,26 @@
 // @title rie tanaka - ningyo hime (terry fail rework)
 // @by terry fail
-// @details v0.0.2
+// @details v0.0.4
 //
 samples('github:tidalcycles/dirt-samples')
-setcpm(70/4)
+setcpm(48/4)
 
-let chords = `[
-  [Em C D D C B B]
+let gt_ch = `[
+  [Em C D C C B B]
   [Em A D D G C Bm A]
   [Em C D G C C B B]
-  [Em A D G C Bm]
-  [C7 G C7 G]
+  [Em Em A D G C Bm]
+  [C7 G C7 G]*2
 ]/16`
 
-let ld_n = "[71 [78 ~] 71 ~]"
-let gu_n = "<[<1,2,3>*4 <0,1,2>*4 <1,2,3>*4]*4>/2, 4*2 1*6"
-// let gu_n = "<[<1,2,3>*4 <1,2,0>*4 <1,2,3>*4]*4>/2, 4*2 0*6"
+let gt_n = "<[<1,2,3>*4 <0,1,2>*4 <1,2,3,4>*4 <1,2,3>*4]*4>/2"
 
-gu: n(gu_n).chord(chords)
-  .voicing().s("gm_acoustic_guitar_nylon").vib(.05)
-  .rel(1).mode("duck").delay(.3)
-// ld: note(ld_n).delay(".7:.25")
+gt: n(gt_n).chord(gt_ch)
+  .adsr(".01:1:1:1")
+  .voicing().s("gm_acoustic_guitar_nylon:[0|0|0|2|5]*8").vib(.05)
+  .rel(1).delay(".6 .8 .9").lpf("1500|1800|2000|2100")
+  .room(".3:4")
+  .juxBy("<.2 .3 .4>", press)
+  .sometimesBy(.1, late(.025))
+  .sometimesBy(.1, early(.025))
+  .gain(.8)
