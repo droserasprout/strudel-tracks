@@ -1,6 +1,6 @@
 // @title rie tanaka - ningyo hime (terry fail rework)
 // @by terry fail
-// @details v0.1.3
+// @details v0.1.4
 //
 samples('github:tidalcycles/dirt-samples')
 setcpm(48/4)
@@ -15,19 +15,19 @@ let gt_ch = `[
 let gt_s = "gm_acoustic_guitar_nylon:[0|0|0|2|5]*8"
 let gtb_n = "[<1,2,3>*3 <0,1,2>*4 <1,2,3,4>*4 <1,2,3>*4]"
 let gtb_lpf = "[1200 1300 1400 1500 1600 1700 2000]/2"
-let gtf_n = "1 2 1 3 1 2 1 3 1 2 1 3 1 2 1 3"
+let gtf_n = "[1 2 1 3] [1 2 1 3] [1 2 1*2 3] [~ [1 2 1] ~ [1 2 1]]"
 
 gtb: n(gtb_n).chord(gt_ch).voicing().s(gt_s)
   .adsr(".01:1:1:1")
-  .vib(.2)
-  .delay(.75).lpf(gtb_lpf)
+  .vib(.15)
+  .delay(.8).lpf(gtb_lpf)
   .room(".2:4")
-  .gain(.65)
+  .gain(".60 .65 .65 .70")
   .juxBy("<.2 .3 .4>", press)
   .compressor("-10:3:10:.005:.02")
 
 gtf: n(gtf_n).chord(gt_ch.rev()).voicing().s(gt_s)
   .adsr(".01:1:1:1")
-  .gain(".35 .4 .45").delay(.75)
-  .room(".2:4")
+  .gain(".35 .40 .45").delay(.75)
+  .room(".3:5")
   .vib(.2)
