@@ -1,6 +1,6 @@
 // @title autumn
 // @by terry fail
-// @details v1.0.1
+// @details v1.0.2
 //
 setcpm(125/4)
   
@@ -33,19 +33,20 @@ const bd_s = "bd:2 bd:1 bd:3 bd:4"
 const hh_s = "~ hh:0 ~ hh:1 ~ hh:2 ~ hh:1"
 const fl_n = "[eb,g,bb,d],[~ ~ ~ <d4 g4>/3]/4"
 
-const sl0 = slider(0.8, 0, 1, 0.1)
-const sl1 = slider(0.7, 0, 1, 0.1)
-const sl2 = slider(1, 0, 2, 1)
+const sl0 = slider(0.7, 0, 1, 0.1)
+const sl1 = slider(0.8, 0, 1, 0.1)
+// const sl2 = slider(0, 0, 2, 1)
+const sl2 = `[0/2 1/8 0/2 1/8 2/4 1/8]/48`
 
 bd: s(bd_s).bank("ry30")
   .adsr(".01:bd_dec:1:0")
   .bite(4, pick(bd_bites, sl2))
   .duckorbit(1).duckattack(.2).duckdepth(.2)
-  .duckorbit(2).duckattack(.4).duckdepth(.1)
+  .duckorbit(2).duckattack(.4).duckdepth(.15)
   .delay("<.4 .5>/2").dfb(.6)
   .lpf(bd_lpf)
   .gain(bd_gain.mul(sl0)).pan(bd_pan)
-  .someCyclesBy(0.1, x => x.hush("bd"))
+  // .someCyclesBy(0.1, x => x.hush("bd"))
 
 hh: s(hh_s).bank("tr808")
   .adsr(".01:.5:1:0")
