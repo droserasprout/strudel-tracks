@@ -1,6 +1,6 @@
 // @title autumn
 // @by terry fail
-// @details v1.0
+// @details v1.0.1
 //
 setcpm(125/4)
   
@@ -38,16 +38,18 @@ const sl1 = slider(0.7, 0, 1, 0.1)
 const sl2 = slider(1, 0, 2, 1)
 
 bd: s(bd_s).bank("ry30")
+  .adsr(".01:bd_dec:1:0")
   .bite(4, pick(bd_bites, sl2))
   .duckorbit(1).duckattack(.2).duckdepth(.2)
   .duckorbit(2).duckattack(.4).duckdepth(.1)
   .delay("<.4 .5>/2").dfb(.6)
-  .att(0.01).dec(bd_dec).lpf(bd_lpf)
+  .lpf(bd_lpf)
   .gain(bd_gain.mul(sl0)).pan(bd_pan)
   .someCyclesBy(0.1, x => x.hush("bd"))
 
 hh: s(hh_s).bank("tr808")
-  .att(0.01).dec(.5).distort(.2)
+  .adsr(".01:.5:1:0")
+  .distort(.2)
   .delay("<.25 .25 .1 .5>/4").dfb(.6)
   .lpf(hh_lpf)
   .gain(hh_gain.mul(sl0)).pan(hh_pan)
@@ -55,7 +57,7 @@ hh: s(hh_s).bank("tr808")
   .someCyclesBy(.2, x => x.slow("2"))
 
 fl: note(fl_n).s("gm_flute")
-  .att(.55).rel(1)
+  .adsr(".55:1:1:1")
   .lpf(fl_lpf)
   .gain(fl_gain.mul(sl1))
   .room(fl_room).rsize(5)
@@ -64,7 +66,8 @@ fl: note(fl_n).s("gm_flute")
   .juxBy(.2, rev)
 
 sh: n(sh_n).scale("C3:minor").s("gm_shamisen")
-  .ph(4).phc(2500).room(.5).lpf(8500).att(.007)
+  .adsr(".007:1:1:0")
+  .ph(4).phc(2500).room(.5).lpf(8500)
   .gain(sh_gain.mul(sl1)).orbit(1)
   .sometimesBy(.2, late(".25"))
   .someCyclesBy(.2, ply("1.5"))
