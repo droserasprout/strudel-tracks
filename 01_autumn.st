@@ -36,7 +36,7 @@ const fl_n = "[eb,g,bb,d],[~ ~ ~ <d4 g4>/3]/4"
 const sl0 = slider(0.7, 0, 1, 0.1)
 const sl1 = slider(0.8, 0, 1, 0.1)
 // const sl2 = slider(0, 0, 2, 1)
-const sl2 = `[0/2 1/8 0/2 1/8 2/4 1/8]/48`
+const sl2 = `[0/2 1/8 2/2 1/8 2/2 1/8]/48`
 
 bd: s(bd_s).bank("ry30")
   .adsr(".01:bd_dec:1:0")
